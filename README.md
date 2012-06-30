@@ -49,6 +49,8 @@ $footerField->setEditorConfig('footer');
 
 // set the editor's body class.  This will make it class="typography footer-content"
 $footerField->setBodyClass('footer-content');
+
+
 ```
 
 
