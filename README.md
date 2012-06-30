@@ -30,6 +30,8 @@ This module adds two features to HTMLEditorField in SilverStripe 3:
 
 Example code:
 ```
+<?php
+
 // make a new TinyMCE config called "footer" by copying the default ("cms") config
 $footerConfig = CustomHtmlEditorConfig::copy('footer', 'cms');
 // remove the third row of the editor toolbar: no tables in the footer!
