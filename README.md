@@ -6,9 +6,8 @@ Overview
 
 This module adds two features to HTMLEditorField in SilverStripe 3:
 
-1) it allows you to set a custom body class on each editor field (for styling the content differently)
-
-2) it allows you to assign different HTMLEditorConfigs to each HTMLEditorField (eg to have different toolbars)
+1. it allows you to set a custom body class on each editor field (for styling the content differently)
+2. it allows you to assign different HTMLEditorConfigs to each HTMLEditorField (eg to have different toolbars)
 
 
 Maintainer Contacts
