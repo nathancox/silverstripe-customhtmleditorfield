@@ -29,7 +29,7 @@ This module adds two features to HTMLEditorField in SilverStripe 3:
 
 
 Example code:
-```
+```php
 <?php
 
 // make a new TinyMCE config called "footer" by copying the default ("cms") config
