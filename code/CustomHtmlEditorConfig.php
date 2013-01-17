@@ -141,7 +141,7 @@ if((typeof tinyMCE != 'undefined')) {
 	 *	CustomHTMLEditorConfig::get('footer')->requireJavascript();
 	 */
 	function requireJavascript() {
-		Requirements::javascript('customhtmleditor/javascript/CustomHTMLEditorField.js');
+		Requirements::javascript('customhtmleditorfield/javascript/CustomHTMLEditorField.js');
 		if (!isset(CustomHTMLEditorConfig::$included_configs[$this->configIdentifier])) {
 			Requirements::customScript($this->generateJS(), 'htmlEditorConfig'.$this->configIdentifier);
 			CustomHTMLEditorConfig::$included_configs[$this->configIdentifier] = $this->configIdentifier;
