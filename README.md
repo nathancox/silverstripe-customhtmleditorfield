@@ -10,6 +10,8 @@ This module adds two features to HTMLEditorField in SilverStripe 3:
 2. it allows you to assign different HTMLEditorConfigs to each HTMLEditorField (eg to have different toolbars)
 
 
+
+
 Maintainer Contacts
 -------------------
 *  Nathan Cox (<nathan@flyingmonkey.co.nz>)

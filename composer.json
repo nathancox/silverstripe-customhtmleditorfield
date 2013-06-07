@@ -1,0 +1,15 @@
+{
+	"name": "nathancox/customhtmleditorfield",
+	"description": "Allows per-editor TinyMCE configurations and body classes in SilverStripe",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "editor", "tinymce"],
+	"authors": [
+		{
+			"name": "Nathan Cox",
+			"email": "nathan@flyingmonkey.co.nz"
+		}
+	],
+	"require": {
+		"silverstripe/framework": ">=3.0"
+	}
+}
