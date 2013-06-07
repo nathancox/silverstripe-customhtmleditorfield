@@ -1,4 +1,4 @@
-SilverStripe 3 CustomHTMLEditorField
+SilverStripe 3 Custom HTMLEditorField
 ===================================
 
 Overview
