@@ -1,30 +1,19 @@
 <?php
 /**
- *	This whole thing basically exists because there's no HTMLEditorConfig::getSettings().
+ *	This basically just exists to give us getter methods for protected properties of HTMLEditorConfig
  *	We "wrap" the HTMLEditorConfig object in an HTMLEditorConfig subclass so it has access to the protected $settings property
  *	This actually just stores the identifier rather than the object itself because we need to know the identifier for the JS.
- *	I'm going to feel really dumb is there's a simpler way to do this
  *	
- *	
- *	$footerConfig = CustomHTMLEditorConfig::copy('sidebar', 'cms', 'Sidebar content');
- *	$footerConfig->setButtonsForLine(2, array());
- *	$footerConfig->setButtonsForLine(3, array());
- *	
- *	$fields->addFieldToTab('Root.Test', $sidebarField = new CustomHTMLEditorField('SidebarText', 'Sidebar'));
- *	$sidebarField->setEditorConfig('sidebar');
- *	
+ *	It also provides a copy() static method that duplicates editor configs for convenience
  *	
  */
-class CustomHTMLEditorConfig extends HtmlEditorConfig {
+class CustomHTMLEditorConfig extends HTMLEditorConfig {
+	
 	/**
 	 *	The identifier string
 	 */
 	var $configIdentifier;
 	
-	/**
-	 *	Tracks which configs have been included in JS to save on double ups
-	 */
-	static $included_configs = array();
 	
 	/**
 	 *	Constructor is passed the identifier of teh HTMLEditorConfig we want to wrap
@@ -46,7 +35,7 @@ class CustomHTMLEditorConfig extends HtmlEditorConfig {
 	
 	
 	/**
-	 *	Creates a new config by cloning an existing one
+	 *	Creates a new config by cloning an existing one.  Just a helplful utility function
 	 *	
 	 *	@param string $newIdentifier	The ID of the new config we're creating
 	 *	@param mixed HtmlEditorConfig|string $old	The old config we're copying, either as an ID string or the object itself
@@ -78,74 +67,29 @@ class CustomHTMLEditorConfig extends HtmlEditorConfig {
 	function getSettings() {
 		return $this->getConfig()->settings;
 	}
-	
+
+
 	/**
 	 *	Returns the wrapped config
 	 *	
-	 *	@return array
+	 *	@return HtmlEditorConfig
 	 */
 	function getConfig() {
 		return HTMLEditorConfig::get($this->configIdentifier);
 	}
 
 
-	/**
-	 *	Does basically the same thing as calling the wrapped config's generateJS with an important difference:
-	 *	It assigns each config to an associative JS array (keyed by identifier) called customTinyMceConfig instead
-	 *	of overwriting ssTinyMceConfig each time.  This way the CustomHTMLEditorField can use a data- attribute to
-	 *	pick which config to use.
-	 *	
-	 *	@param string javascript to be Required::javascript()ed by CustomHTMLEditorField
-	 */
-	function generateJS() {
-		$config = $this->getConfig();
-		$settings = $config->settings;
-		
-		// plugins
-		$internalPlugins = array();
-		$externalPluginsJS = '';
-		foreach($config->plugins as $plugin => $path) {
-			if(!$path) {
-				$internalPlugins[] = $plugin;
-			} else {
-				$internalPlugins[] = '-' . $plugin;
-				$externalPluginsJS .= sprintf(
-					'tinymce.PluginManager.load("%s", "%s");' . "\n",
-					$plugin,
-					$path
-				);
-			}
-		}
-		$settings['plugins'] = implode(',', $internalPlugins);
-		
-		foreach ($config->buttons as $i=>$buttons) {
-			$settings['theme_advanced_buttons'.$i] = implode(',', $buttons);
-		}
-		
-		return "
-if((typeof tinyMCE != 'undefined')) {
-	$externalPluginsJS
-	
-	if (typeof customTinyMceConfig == 'undefined') {
-		var customTinyMceConfig = [];
-	}
-	customTinyMceConfig['".$this->configIdentifier."'] = " . Convert::raw2json($settings) . ";
-}
-";
-	}
-	
-	
-	/**
-	 *	Calls generateJS() but also Requires the JS.  Basically functionality copied and pasted from CustomHTMLEditorField::includeJS();
-	 *	The goal is to let us attach custom configs to regular HTMLEditorConfig by setting the data-config-id attribute and calling this like
-	 *	CustomHTMLEditorConfig::get('footer')->requireJavascript();
-	 */
-	function requireJavascript() {
-		Requirements::javascript('customhtmleditorfield/javascript/CustomHTMLEditorField.js');
-		if (!isset(CustomHTMLEditorConfig::$included_configs[$this->configIdentifier])) {
-			Requirements::customScript($this->generateJS(), 'htmlEditorConfig'.$this->configIdentifier);
-			CustomHTMLEditorConfig::$included_configs[$this->configIdentifier] = $this->configIdentifier;
-		}
-	}	
 
-};
+	/**
+	 *	Returns the buttons array of the wrapped config
+	 *	
+	 *	@return array
+	 */
+	function getButtons() {
+		return $this->getConfig()->buttons;
+	}
+
+
+
+	
+}
