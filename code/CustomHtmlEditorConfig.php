@@ -12,7 +12,7 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	/**
 	 *	The identifier string
 	 */
-	var $configIdentifier;
+	public $configIdentifier;
 	
 	
 	/**
