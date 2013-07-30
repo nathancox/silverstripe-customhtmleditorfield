@@ -62,7 +62,7 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 				}
 			}
 
-			$language = $configObj->getOption('language');
+			$language = $configObj->getConfig()->getOption('language');
 			if ($language) {
 				$languages[$language] = $language;
 			}
