@@ -90,6 +90,15 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	}
 
 
+	/**
+	 * Returns the plugins array of the wrapped config
+	 *
+	 * @return array
+	 */
+	function getPlugins() {
+		return $this->getConfig()->plugins;
+	}
+
 
 	
 }
