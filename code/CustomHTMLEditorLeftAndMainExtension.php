@@ -3,19 +3,19 @@
  * Extends LeftAndMain::init() to include all the HTMLEditorField configs in the initial page load
  */
 class CustomHTMLEditorLeftAndMainExtension extends Extension {
-	
+
 
 	function init() {
 		Requirements::javascript(basename(dirname(__DIR__)) . '/javascript/CustomHTMLEditorField.js');
 		CustomHTMLEditorLeftAndMainExtension::include_js();
 	}
-	
+
 
 	/**
-	 * This basically merges HtmlEditorField::include_js() and HTMLEditorConfig::generateJS() to output all 
+	 * This basically merges HtmlEditorField::include_js() and HTMLEditorConfig::generateJS() to output all
 	 * configuration sets to a customTinyMceConfigs javascript array.
-	 * This is output in addition to the standard ssTinyMceConfig because a) we can't stop the default output 
-	 * with extensions; and b) the default setting is still used for any HTMLEditorField that doesn't specify 
+	 * This is output in addition to the standard ssTinyMceConfig because a) we can't stop the default output
+	 * with extensions; and b) the default setting is still used for any HTMLEditorField that doesn't specify
 	 * it's own config.
 	 *
 	 * Calls Requirements::javascript() to load the scripts.
@@ -32,12 +32,12 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 		//$allConfigs = array();
 		$settingsJS = '';
 		$externalPluginsForJS = array();
-		$internalPluginsForJS = array();
 
 		$activeConfig = HtmlEditorConfig::get_active();
 
 		foreach ($availableConfigs as $identifier => $friendlyName) {
 			$configObj = CustomHtmlEditorConfig::get($identifier);
+			$internalPluginsForJS = array();
 
 			$configObj->getConfig()->setOption('language', i18n::get_tinymce_lang());
 			if(!$configObj->getConfig()->getOption('content_css')) {
@@ -46,7 +46,7 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 
 
 			$settings = $configObj->getSettings();
-			
+
 
 			foreach($configObj->getPlugins() as $plugin => $path) {
 				if(!$path) {
@@ -69,7 +69,7 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 
 
 			$settings['plugins'] = implode(',', $internalPluginsForJS);
-			
+
 			$buttons = $configObj->getButtons();
 			foreach ($buttons as $i=>$buttons) {
 				$settings['theme_advanced_buttons'.$i] = implode(',', $buttons);
@@ -98,7 +98,7 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 		$script = <<<JS
 			if((typeof tinyMCE != 'undefined')) {
 				{$externalPluginsJS}
-				
+
 				if (typeof customTinyMceConfigs == 'undefined') {
 					var customTinyMceConfigs = [];
 				}
@@ -113,5 +113,5 @@ JS;
 
 
 
-	
+
 }
