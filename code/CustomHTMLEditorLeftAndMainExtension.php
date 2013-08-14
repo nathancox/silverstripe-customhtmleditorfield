@@ -80,7 +80,7 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 
 
 
-		if(HtmlEditorField::$use_gzip) {
+		if(Config::inst()->get('HtmlEditorField', 'use_gzip')) {
 			$tag = TinyMCE_Compressor::renderTag(array(
 				'url' => THIRDPARTY_DIR . '/tinymce/tiny_mce_gzip.php',
 				'plugins' => implode(',', $pluginsForTag),
