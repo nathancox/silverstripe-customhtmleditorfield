@@ -64,7 +64,8 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	static function copy($newIdentifier, $old, $name = null) {
 	
 		if (is_string($old)) {
-			$old = CustomHTMLEditorConfig::get($old);
+		//	$old = CustomHTMLEditorConfig::get($old);
+			$old = HTMLEditorConfig::get($old);
 		}
 		
 
@@ -74,13 +75,19 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 //		HTMLEditorConfig::$configs[$newIdentifier] = clone $old;
 		$newConfig = HTMLEditorConfig::get($newIdentifier);
 		
-		$settings = $old->getSettings();
-		foreach ($settings as $key => $value) {
+	//	$settings = $old->getSettings();
+		foreach ($old->settings as $key => $value) {
 			$newConfig->setOption($key, $value);
 		}
 		
 		$plugins = $old->getPlugins();
 		$newConfig->plugins = $plugins;
+
+		$buttons = $old->buttons;
+
+
+		$newConfig->buttons = $buttons;
+
 		
 		if ($name) {
 			$newConfig->setOption('friendly_name', $name);
