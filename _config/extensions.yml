@@ -1,0 +1,10 @@
+---
+Name: customhtmleditorfieldextensions
+---
+HtmlEditorField:
+  extensions:
+    - CustomHtmlEditorFieldExtension
+
+LeftAndMain:
+  extensions:
+    - CustomHTMLEditorLeftAndMainExtension
