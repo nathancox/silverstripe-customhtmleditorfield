@@ -6,8 +6,8 @@ class CustomHTMLEditorLeftAndMainExtension extends Extension {
 
 
 	function init() {
-		Requirements::javascript(basename(dirname(__DIR__)) . '/javascript/CustomHTMLEditorField.js');
-		CustomHTMLEditorLeftAndMainExtension::include_js();
+		//Requirements::javascript(basename(dirname(__DIR__)) . '/javascript/CustomHTMLEditorField.js');
+		//CustomHTMLEditorLeftAndMainExtension::include_js();
 	}
 
 
