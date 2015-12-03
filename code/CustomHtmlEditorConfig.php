@@ -14,7 +14,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	 */
 	public $configIdentifier;
 	
-	
 	/**
 	 *	Constructor is passed the identifier of teh HTMLEditorConfig we want to wrap
 	 *	
@@ -32,7 +31,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	static function get($identifier = 'default') {
 		return new CustomHTMLEditorConfig($identifier);
 	}
-	
 	
 	/**
 	 *	Creates a new config by cloning an existing one.  Just a helplful utility function
@@ -69,7 +67,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 		return $newConfig;
 	}
 	
-	
 	/**
 	 *	Returns the settings array of the wrapped config
 	 *	
@@ -78,7 +75,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	function getSettings() {
 		return $this->getConfig()->settings;
 	}
-
 
 	/**
 	 *	Returns the wrapped config
@@ -89,8 +85,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 		return HTMLEditorConfig::get($this->configIdentifier);
 	}
 
-
-
 	/**
 	 *	Returns the buttons array of the wrapped config
 	 *	
@@ -100,7 +94,6 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 		return $this->getConfig()->buttons;
 	}
 
-
 	/**
 	 * Returns the plugins array of the wrapped config
 	 *
@@ -109,7 +102,4 @@ class CustomHTMLEditorConfig extends HTMLEditorConfig {
 	function getPlugins() {
 		return $this->getConfig()->plugins;
 	}
-
-
-	
 }
