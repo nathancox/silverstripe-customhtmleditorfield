@@ -14,7 +14,7 @@ This module adds two features to HTMLEditorField in SilverStripe 3:
 
 Maintainer Contacts
 -------------------
-*  Nathan Cox (<nathan@flyingmonkey.co.nz>)
+*  Nathan Cox (me@nathan.net.nz)
 
 
 Requirements
