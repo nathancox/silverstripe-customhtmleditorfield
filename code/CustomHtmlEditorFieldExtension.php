@@ -11,6 +11,7 @@ class CustomHtmlEditorFieldExtension extends Extension
     public function setEditorConfig($identifier)
     {
         CustomHTMLEditorField::set_editor_config($this->owner, $identifier);
+        return $this->owner;
     }
 
     /**
@@ -43,6 +44,7 @@ class CustomHtmlEditorFieldExtension extends Extension
     public function setBodyClass($classes)
     {
         $this->owner->setAttribute('data-body-class', $classes);
+        return $this->owner;
     }
 
     /**
